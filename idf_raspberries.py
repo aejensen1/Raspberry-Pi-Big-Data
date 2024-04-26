@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/media/root/Anders J/Pi_Files/py_libraries')
+sys.path.append('/home/raspberries/EXTERNDV/py_libraries')
 
 
 # idf -- the lower the score, the more frequent its usages across documents
@@ -23,7 +23,7 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 # df = spark.read.json('/Users/sgipson/Desktop/arxiv-metadata-oai-snapshot.json')
-df = spark.read.json("/media/raspberries/EXTERNDV/Pi_Files/titles-20MB.json")
+df = spark.read.json("/home/raspberries/EXTERNDV/arxiv-metadata-oai-snapshot-full-dataset.json")
 df.printSchema()
 df.show()
 print(df.columns)
@@ -91,7 +91,7 @@ print(lows)
 wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(lows)
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.title('Low TF-IDF Scores')
-plt.savefig('low-score-titles.png')
+plt.savefig('/home/raspberries/low-score-titles.png')
 plt.clf()
 # word cloud for high scores
 highs = sorted_idfs[-100:]
@@ -100,7 +100,7 @@ print(highs)
 wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(highs)
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.title('High TF-IDF Scores')
-plt.savefig('high-score-titles.png')
+plt.savefig('/home/raspberries/high-score-titles.png')
 
 end = time.time()
 print('Execution time in seconds:', end-start)
